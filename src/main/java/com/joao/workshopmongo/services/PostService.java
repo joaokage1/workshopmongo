@@ -1,5 +1,6 @@
 package com.joao.workshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,11 @@ public class PostService {
 
 	public List<Post> fetchPostsByTitle(String search) {
 		return getRepository().fetchPostsByTitle(search);
+	}
+
+	public List<Post> fetchPostsByStringAndDate(String search, Date minDate, Date maxDate) {
+		maxDate = new Date(maxDate.getTime() + (24 * 60 * 60 * 1000));
+		return getRepository().fullSearch(search, minDate, maxDate);
 	}
 
 }
