@@ -30,7 +30,7 @@ public class PostService {
 	}
 
 	public List<Post> fetchPostsByTitle(String search) {
-		return getRepository().findByTitleContainingIgnoreCase(search);
+		return getRepository().fetchPostsByTitle(search);
 	}
 
 }
