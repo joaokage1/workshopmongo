@@ -29,13 +29,18 @@ public class UserService {
 		return getRepository().findAll();
 	}
 
-	public User fetchById(String id) {
+	public User fetchUserById(String id) {
 		Optional<User> user = getRepository().findById(id);
 		return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 
 	public User insertUser(User user) {
 		return getRepository().insert(user);
+	}
+
+	public void deleteUser(String id) {
+		fetchUserById(id);
+		getRepository().deleteById(id);
 	}
 
 	public User fromUserDTO(UserDTO userDTO) {

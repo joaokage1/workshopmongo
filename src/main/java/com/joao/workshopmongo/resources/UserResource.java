@@ -40,7 +40,7 @@ public class UserResource {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	public ResponseEntity<UserDTO> fetchUserById(@PathVariable String id) {
-		User user = getService().fetchById(id);
+		User user = getService().fetchUserById(id);
 		return ResponseEntity.ok().body(new UserDTO(user));
 	}
 
@@ -50,5 +50,11 @@ public class UserResource {
 		user = getService().insertUser(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+	public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+		getService().deleteUser(id);
+		return ResponseEntity.noContent().build();
 	}
 }
